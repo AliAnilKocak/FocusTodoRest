@@ -1,10 +1,15 @@
 package com.cale.focustodo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "todo")
@@ -25,7 +30,6 @@ public class Todo extends BaseEntity {
     private String time;
     private String energy;
     private Date dueDate;
-
 
 
 
