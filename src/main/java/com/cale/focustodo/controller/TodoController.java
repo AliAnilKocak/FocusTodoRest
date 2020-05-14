@@ -32,6 +32,11 @@ public class TodoController {
         return todoService.getTodoById(id);
     }
 
+    @GetMapping("todosdeneme/{id}")
+    public List<Todo> productByIddeneme(@PathVariable int id) {
+        return todoService.getTodoByIdDetail(id);
+    }
+
     @PutMapping("todos")
     public Todo updateTodo(@RequestBody Todo todo) {
         return todoService.updateTodo(todo);

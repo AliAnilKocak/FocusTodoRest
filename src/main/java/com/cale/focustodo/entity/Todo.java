@@ -22,6 +22,8 @@ public class Todo extends BaseEntity {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
+
     private int id;
 
     private String title;
@@ -31,6 +33,8 @@ public class Todo extends BaseEntity {
     private String energy;
     private Date dueDate;
 
-
+    @JoinColumn(name = "action_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Action action;
 
 }

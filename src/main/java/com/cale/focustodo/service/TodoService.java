@@ -37,6 +37,9 @@ public class TodoService {
     public Todo getTodoById(int todoId){
         return todoRepository.findById(todoId).orElse(null);
     }
+    public List<Todo> getTodoByIdDetail(int actionId){
+        return todoRepository.getByAction_Id(actionId);
+    }
 
     public Todo deleteProduct(int todoId){
         Todo todo = getTodoById(todoId);
