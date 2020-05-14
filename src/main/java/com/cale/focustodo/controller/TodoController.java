@@ -21,15 +21,16 @@ public class TodoController {
 
     @PostMapping("todos")
     @ResponseStatus(HttpStatus.CREATED)
-    public TodoDto addTodo(@RequestHeader("Authorization") String userAgent,@RequestBody TodoDto todo) {
-        System.out.println("------------------"+userAgent.substring(7)+"-++-------------");
-        return todoService.saveTodo(todo);
+    public TodoDto addTodo(@RequestHeader("Authorization") String tokenHeader,@RequestBody TodoDto todo) {
+        String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
+        System.out.println("-----------"+username+"-------------");
+        return todoService.saveTodo(todo,username);
     }
 
     @GetMapping("todos")
-    public List<Todo> AllTodos(@RequestHeader("Authorization") String userAgent) {
-        System.out.println("------------------"+userAgent.substring(7)+"-++-------------");
-        System.out.println("------------------"+jwtUtil.extractUsername(userAgent.substring(7))+"-++-------------");
+    public List<Todo> AllTodos(@RequestHeader("Authorization") String tokenHeader) {
+        String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
+        System.out.println("-----------"+username+"-------------");
         return todoService.getTodos();
     }
 

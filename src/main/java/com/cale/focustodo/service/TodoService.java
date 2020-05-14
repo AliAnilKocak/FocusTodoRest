@@ -2,8 +2,10 @@ package com.cale.focustodo.service;
 
 
 import com.cale.focustodo.dto.TodoDto;
+import com.cale.focustodo.entity.Action;
 import com.cale.focustodo.entity.ApplicationUser;
 import com.cale.focustodo.entity.Todo;
+import com.cale.focustodo.repository.ActionRepository;
 import com.cale.focustodo.repository.TodoRepository;
 import com.cale.focustodo.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -20,17 +22,24 @@ public class TodoService {
     private TodoRepository todoRepository;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
+    private final ActionRepository actionRepository;
 
-    public TodoService(TodoRepository todoRepository, ModelMapper modelMapper, UserRepository userRepository) {
+    public TodoService(TodoRepository todoRepository, ModelMapper modelMapper, UserRepository userRepository, ActionRepository actionRepository) {
         this.todoRepository = todoRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
+        this.actionRepository = actionRepository;
     }
 
-    public TodoDto saveTodo(TodoDto todoDto) {
+    public TodoDto saveTodo(TodoDto todoDto,String userName) {
+
         Todo todoEntity = modelMapper.map(todoDto, Todo.class);
-        ApplicationUser applicationUser = userRepository.getOne(todoDto.getUser_id());
-        todoEntity.setUser(applicationUser);
+
+        ApplicationUser currentUser = userRepository.findByUsername(userName);
+        Action currentAction = actionRepository.getOne(todoDto.getAction_id());
+
+        todoEntity.setUser(currentUser);
+        todoEntity.setAction(currentAction);
 
         todoEntity = todoRepository.save(todoEntity);
         todoDto.setId(todoEntity.getId());

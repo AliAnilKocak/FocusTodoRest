@@ -21,6 +21,11 @@ public class JwtUtilService {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public String extractUsernameFromRequest(String tokenHeader) {
+        String token = tokenHeader.substring(7);
+        return extractClaim(token, Claims::getSubject);
+    }
+
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }

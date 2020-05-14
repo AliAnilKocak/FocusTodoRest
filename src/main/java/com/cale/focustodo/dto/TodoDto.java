@@ -25,6 +25,5 @@ public class TodoDto {
     private String energy;
     private Date dueDate;
     private int action_id;
-    @NotNull
-    private int user_id;
+
 }
