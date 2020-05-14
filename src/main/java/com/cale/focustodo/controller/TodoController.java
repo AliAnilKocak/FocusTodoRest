@@ -28,7 +28,7 @@ public class TodoController {
     }
 
     @GetMapping("todos")
-    public List<Todo> AllTodos(@RequestHeader("Authorization") String tokenHeader) {
+    public List<TodoDto> AllTodos(@RequestHeader("Authorization") String tokenHeader) {
         String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
         System.out.println("-----------"+username+"-------------");
         return todoService.getTodos();

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class TodoService {
         this.userRepository = userRepository;
         this.actionRepository = actionRepository;
     }
+    
 
     public TodoDto saveTodo(TodoDto todoDto,String userName) {
 
@@ -46,13 +48,10 @@ public class TodoService {
         return todoDto;
     }
 
-    public TodoService todoRepository(final TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-        return this;
-    }
 
-    public List<Todo> getTodos() {
-        return todoRepository.findAll();
+    public List<TodoDto> getTodos() {
+        List<Todo> data = todoRepository.findAll();
+        return Arrays.asList(modelMapper.map(data, TodoDto[].class));
     }
 
     public Page<Todo> getPaginatedCharacters(int pageNumber, int size) {
