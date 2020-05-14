@@ -36,6 +36,7 @@ public class Todo extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Action action;
 
+    @JsonIgnore
     @JoinColumn(name = "user_id",nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private ApplicationUser user;

@@ -1,5 +1,6 @@
 package com.cale.focustodo.controller;
 
+import com.cale.focustodo.dto.ActionDto;
 import com.cale.focustodo.entity.Action;
 import com.cale.focustodo.entity.Todo;
 import com.cale.focustodo.service.ActionService;
@@ -20,17 +21,17 @@ public class ActionController {
 
     @PostMapping("actions")
     @ResponseStatus(HttpStatus.CREATED)
-    public Action addAction(@RequestBody Action action) {
+    public ActionDto addAction(@RequestBody ActionDto action) {
         return actionService.saveAction(action);
     }
 
     @GetMapping("actions")
-    public List<Action> AllActions() {
+    public List<ActionDto> AllActions() {
         return actionService.getActions();
     }
 
     @GetMapping("actions/{id}")
-    public Action productById(@PathVariable int id) {
+    public ActionDto productById(@PathVariable int id) {
         return actionService.getActionById(id);
     }
 
