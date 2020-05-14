@@ -1,9 +1,11 @@
 package com.cale.focustodo.controller;
 
 import com.cale.focustodo.entity.ApplicationUser;
+import com.cale.focustodo.entity.Login;
 import com.cale.focustodo.service.JwtUtilService;
 import com.cale.focustodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ public class AccountController {
     private UserService userService;
 
     @PostMapping("/login")
-    public String login(@RequestBody ApplicationUser userCredentials) throws Exception {
+    public ResponseEntity<Login> login(@RequestBody ApplicationUser userCredentials) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userCredentials.getUsername(), userCredentials.getPassword())
