@@ -35,22 +35,22 @@ public class TodoController {
     }
 
     @GetMapping("todos/{id}")
-    public Todo productById(@PathVariable int id) {
+    public TodoDto productById(@PathVariable int id) {
         return todoService.getTodoById(id);
     }
 
     @GetMapping("todosdeneme/{id}")
-    public List<Todo> productByIddeneme(@PathVariable int id) {
+    public List<TodoDto> productByIddeneme(@PathVariable int id) {
         return todoService.getTodoByIdDetail(id);
     }
 
     @PutMapping("todos")
-    public Todo updateTodo(@RequestBody Todo todo) {
+    public TodoDto updateTodo(@RequestBody Todo todo) {
         return todoService.updateTodo(todo);
     }
 
     @DeleteMapping("todos/{id}")
-    public Todo deleteTodo(@PathVariable int id) {
+    public TodoDto deleteTodo(@PathVariable int id) {
         return todoService.deleteProduct(id);
     }
 

@@ -31,7 +31,7 @@ public class TodoService {
         this.userRepository = userRepository;
         this.actionRepository = actionRepository;
     }
-    
+
 
     public TodoDto saveTodo(TodoDto todoDto,String userName) {
 
@@ -54,7 +54,7 @@ public class TodoService {
         return Arrays.asList(modelMapper.map(data, TodoDto[].class));
     }
 
-    public Page<Todo> getPaginatedCharacters(int pageNumber, int size) {
+    public Page<Todo> getPaginatedCharacters(int pageNumber, int size) { //TODO TodoDto
         PageRequest pageable = PageRequest.of(pageNumber - 1, size);
         Page<Todo> resultPage = todoRepository.findAll(pageable);
         if (pageNumber > resultPage.getTotalPages()) {
@@ -63,21 +63,24 @@ public class TodoService {
         return resultPage;
     }
 
-    public Todo getTodoById(int todoId) {
-        return todoRepository.findById(todoId).orElse(null);
+    public TodoDto getTodoById(int todoId) {
+        Todo currentTodo = todoRepository.getOne(todoId);
+        return modelMapper.map(currentTodo, TodoDto.class);
+
     }
 
-    public List<Todo> getTodoByIdDetail(int actionId) {
-        return todoRepository.getByAction_Id(actionId);
+    public List<TodoDto> getTodoByIdDetail(int actionId) {
+        List<Todo> currentTodo = todoRepository.getByAction_Id(actionId);
+        return Arrays.asList(modelMapper.map(currentTodo, TodoDto[].class));
     }
 
-    public Todo deleteProduct(int todoId) {
-        Todo todo = getTodoById(todoId);
+    public TodoDto deleteProduct(int todoId) {
+        TodoDto todo = getTodoById(todoId);
         todoRepository.deleteById(todoId);
         return todo;
     }
 
-    public Todo updateTodo(Todo todo) {
+    public TodoDto updateTodo(Todo todo) {
         System.out.println(todo.toString());
         Todo existingTodo = todoRepository.findById(todo.getId()).orElse(null);
         existingTodo.setTitle(todo.getTitle());
@@ -86,7 +89,9 @@ public class TodoService {
         existingTodo.setTime(todo.getTime());
         existingTodo.setEnergy(todo.getEnergy());
         existingTodo.setDueDate(todo.getDueDate());
-        return todoRepository.save(existingTodo);
+        Todo todoResponse = todoRepository.save(existingTodo);
+        return modelMapper.map(todoResponse,TodoDto.class);
+
     }
 
 
