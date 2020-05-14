@@ -1,12 +1,8 @@
 package com.cale.focustodo.controller;
 
 import com.cale.focustodo.dto.ActionDto;
-import com.cale.focustodo.entity.Action;
-import com.cale.focustodo.entity.Todo;
 import com.cale.focustodo.service.ActionService;
-import com.cale.focustodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.cale.focustodo.filters;
+package com.cale.focustodo.security.filters;
 
 import org.springframework.stereotype.Component;
 

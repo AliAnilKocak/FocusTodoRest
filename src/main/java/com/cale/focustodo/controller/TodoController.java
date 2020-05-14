@@ -2,7 +2,7 @@ package com.cale.focustodo.controller;
 
 import com.cale.focustodo.dto.TodoDto;
 import com.cale.focustodo.entity.Todo;
-import com.cale.focustodo.service.JwtUtilService;
+import com.cale.focustodo.security.JwtUtilService;
 import com.cale.focustodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

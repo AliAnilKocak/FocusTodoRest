@@ -1,14 +1,11 @@
 package com.cale.focustodo.dto;
 
 import com.cale.focustodo.entity.Action;
-import com.cale.focustodo.entity.ApplicationUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Date;
 @Data
 @AllArgsConstructor

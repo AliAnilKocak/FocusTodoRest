@@ -1,6 +1,6 @@
-package com.cale.focustodo.filters;
+package com.cale.focustodo.security.filters;
 
-import com.cale.focustodo.service.JwtUtilService;
+import com.cale.focustodo.security.JwtUtilService;
 import com.cale.focustodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

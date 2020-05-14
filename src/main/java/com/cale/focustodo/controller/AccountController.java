@@ -3,7 +3,7 @@ package com.cale.focustodo.controller;
 import com.cale.focustodo.dto.LoginResponseDto;
 import com.cale.focustodo.dto.RegisterResponseDto;
 import com.cale.focustodo.entity.ApplicationUser;
-import com.cale.focustodo.service.JwtUtilService;
+import com.cale.focustodo.security.JwtUtilService;
 import com.cale.focustodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

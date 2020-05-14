@@ -1,6 +1,6 @@
-package com.cale.focustodo.config;
+package com.cale.focustodo.security.config;
 
-import com.cale.focustodo.filters.MyFilter;
+import com.cale.focustodo.security.filters.MyFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

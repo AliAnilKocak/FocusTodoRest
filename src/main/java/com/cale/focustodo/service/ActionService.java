@@ -2,9 +2,7 @@ package com.cale.focustodo.service;
 
 
 import com.cale.focustodo.dto.ActionDto;
-import com.cale.focustodo.dto.TodoDto;
 import com.cale.focustodo.entity.Action;
-import com.cale.focustodo.entity.Todo;
 import com.cale.focustodo.repository.ActionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

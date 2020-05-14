@@ -1,6 +1,6 @@
-package com.cale.focustodo.config;
+package com.cale.focustodo.security.config;
 
-import com.cale.focustodo.filters.JwtFilter;
+import com.cale.focustodo.security.filters.JwtFilter;
 import com.cale.focustodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
