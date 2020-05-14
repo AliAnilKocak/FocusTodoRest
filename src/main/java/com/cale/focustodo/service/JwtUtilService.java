@@ -1,13 +1,12 @@
 package com.cale.focustodo.service;
 
-import com.cale.focustodo.entity.Login;
+import com.cale.focustodo.dto.LoginResponseDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -39,12 +38,12 @@ public class JwtUtilService {
         return extractExpiration(token).before(new Date());
     }
 
-    public ResponseEntity<Login> generateToken(String username) {
+    public ResponseEntity<LoginResponseDto> generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
     }
 
-    private ResponseEntity<Login> createToken(Map<String, Object> claims, String subject) {
+    private ResponseEntity<LoginResponseDto> createToken(Map<String, Object> claims, String subject) {
 
 //        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 //                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
@@ -54,7 +53,7 @@ public class JwtUtilService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100))
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
 
-        return ResponseEntity.ok(new Login(token));
+        return ResponseEntity.ok(new LoginResponseDto(token));
 
     }
 

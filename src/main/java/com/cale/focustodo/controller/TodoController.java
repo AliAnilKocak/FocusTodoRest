@@ -1,6 +1,8 @@
 package com.cale.focustodo.controller;
 
+import com.cale.focustodo.dto.TodoDto;
 import com.cale.focustodo.entity.Todo;
+import com.cale.focustodo.service.JwtUtilService;
 import com.cale.focustodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,16 +16,20 @@ public class TodoController {
 
     @Autowired
     private TodoService todoService;
-
+    @Autowired
+    private JwtUtilService jwtUtil;
 
     @PostMapping("todos")
     @ResponseStatus(HttpStatus.CREATED)
-    public Todo addTodo(@RequestBody Todo todo) {
+    public TodoDto addTodo(@RequestHeader("Authorization") String userAgent,@RequestBody TodoDto todo) {
+        System.out.println("------------------"+userAgent.substring(7)+"-++-------------");
         return todoService.saveTodo(todo);
     }
 
     @GetMapping("todos")
-    public List<Todo> AllTodos() {
+    public List<Todo> AllTodos(@RequestHeader("Authorization") String userAgent) {
+        System.out.println("------------------"+userAgent.substring(7)+"-++-------------");
+        System.out.println("------------------"+jwtUtil.extractUsername(userAgent.substring(7))+"-++-------------");
         return todoService.getTodos();
     }
 

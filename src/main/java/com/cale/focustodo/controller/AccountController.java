@@ -1,7 +1,8 @@
 package com.cale.focustodo.controller;
 
+import com.cale.focustodo.dto.LoginResponseDto;
+import com.cale.focustodo.dto.RegisterResponseDto;
 import com.cale.focustodo.entity.ApplicationUser;
-import com.cale.focustodo.entity.Login;
 import com.cale.focustodo.service.JwtUtilService;
 import com.cale.focustodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class AccountController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Login> login(@RequestBody ApplicationUser userCredentials) throws Exception {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody ApplicationUser userCredentials) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userCredentials.getUsername(), userCredentials.getPassword())
@@ -36,10 +37,10 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody ApplicationUser user) {
+    public ResponseEntity<RegisterResponseDto> register(@RequestBody ApplicationUser user) {
         if (userService.registerUser(user)) {
-            return "User Created";
+            return ResponseEntity.ok(new RegisterResponseDto("User created.",true));
         }
-        return "User Creation Failed!";
+        return ResponseEntity.ok(new RegisterResponseDto("User created faile.",false));
     }
 }

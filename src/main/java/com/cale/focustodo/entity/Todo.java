@@ -23,7 +23,6 @@ public class Todo extends BaseEntity {
     @Id
     @GeneratedValue
     @JsonIgnore
-
     private int id;
 
     private String title;
@@ -36,5 +35,10 @@ public class Todo extends BaseEntity {
     @JoinColumn(name = "action_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Action action;
+
+    @JoinColumn(name = "user_id",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private ApplicationUser user;
+
 
 }

@@ -1,15 +1,13 @@
-package com.cale.focustodo.entity;
+package com.cale.focustodo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login {
+public class LoginResponseDto {
 
     private String token;
 }
