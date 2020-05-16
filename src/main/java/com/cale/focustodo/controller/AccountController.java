@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/account")
@@ -25,6 +22,7 @@ public class AccountController {
     private UserService userService;
 
     @PostMapping("/login")
+    @CrossOrigin("*")
     public ResponseEntity<LoginResponseDto> login(@RequestBody ApplicationUser userCredentials) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -33,10 +31,11 @@ public class AccountController {
         } catch (Exception e) {
             throw new Exception("Invalid Credentials");
         }
-        return jwtUtil.generateToken(userCredentials.getUsername());
+        return jwtUtil.generateToken(userCredentials.getUsername(),userCredentials);
     }
 
     @PostMapping("/register")
+    @CrossOrigin("*")
     public ResponseEntity<RegisterResponseDto> register(@RequestBody ApplicationUser user) {
         if (userService.registerUser(user)) {
             return ResponseEntity.ok(new RegisterResponseDto("User created.",true));

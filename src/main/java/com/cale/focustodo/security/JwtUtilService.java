@@ -1,9 +1,13 @@
 package com.cale.focustodo.security;
 
 import com.cale.focustodo.dto.LoginResponseDto;
+import com.cale.focustodo.entity.ApplicationUser;
+import com.cale.focustodo.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,9 @@ import java.util.function.Function;
 @Service
 public class JwtUtilService {
     private final String secret = "vhbsdhjbsdjhbreyvjhvbsdhjsvbjhsdvj";
+
+    @Autowired
+    UserRepository userRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -43,22 +50,20 @@ public class JwtUtilService {
         return extractExpiration(token).before(new Date());
     }
 
-    public ResponseEntity<LoginResponseDto> generateToken(String username) {
+    public ResponseEntity<LoginResponseDto> generateToken(String username, ApplicationUser applicationUser) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+        return createToken(claims, username,applicationUser);
     }
 
-    private ResponseEntity<LoginResponseDto> createToken(Map<String, Object> claims, String subject) {
+    private ResponseEntity<LoginResponseDto> createToken(Map<String, Object> claims, String subject,ApplicationUser applicationUser) {
 
-//        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-//                .signWith(SignatureAlgorithm.HS256, secret).compact();
+        ApplicationUser curentUser = userRepository.findByUsername(applicationUser.getUsername());
 
         String token = Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100)) //TODO 1000 * 60 * 60 * 10
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
 
-        return ResponseEntity.ok(new LoginResponseDto(token));
+        return ResponseEntity.ok(new LoginResponseDto(token,curentUser.getId(),curentUser.getUsername(),curentUser.getEmail()));
 
     }
 
