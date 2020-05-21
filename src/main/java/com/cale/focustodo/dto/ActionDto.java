@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 public class ActionDto {
     private int id;
     private String name;
+    private String icon;
+    private String slug;
 
 }
