@@ -15,7 +15,6 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class FocusTodoApplication {
 
-
     @Autowired
     private UserRepository userRepository;
     @Autowired

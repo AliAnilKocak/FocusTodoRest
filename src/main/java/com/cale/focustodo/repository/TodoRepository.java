@@ -10,4 +10,5 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo,Integer> {
     Page<Todo> findAll(Pageable pageable);
     List<Todo> getByAction_Id(int id);
+    List<Todo> getByUserId(int id);
 }

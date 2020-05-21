@@ -49,8 +49,9 @@ public class TodoService {
     }
 
 
-    public List<TodoDto> getTodos() {
-        List<Todo> data = todoRepository.findAll();
+    public List<TodoDto> getTodos(String username) {
+        ApplicationUser currentUser = userRepository.findByUsername(username);
+        List<Todo> data = todoRepository.getByUserId(currentUser.getId());
         return Arrays.asList(modelMapper.map(data, TodoDto[].class));
     }
 
