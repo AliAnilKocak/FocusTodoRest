@@ -23,8 +23,9 @@ public class Todo extends BaseEntity {
 
     private String title;
     private String description;
-    private int is_favorite;
+    private boolean isFavorite;
     private String time;
+    private boolean isCompleted;
     private String energy;
     private Date dueDate;
 

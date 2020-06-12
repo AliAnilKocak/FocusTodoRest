@@ -81,15 +81,16 @@ public class TodoService {
         return todo;
     }
 
-    public TodoDto updateTodo(Todo todo) {
-        System.out.println(todo.toString());
-        Todo existingTodo = todoRepository.findById(todo.getId()).orElse(null);
-        existingTodo.setTitle(todo.getTitle());
-        existingTodo.setDescription(todo.getDescription());
-        existingTodo.setIs_favorite(todo.getIs_favorite());
-        existingTodo.setTime(todo.getTime());
-        existingTodo.setEnergy(todo.getEnergy());
-        existingTodo.setDueDate(todo.getDueDate());
+    public TodoDto updateTodo(TodoDto todoDto) {
+        System.out.println(todoDto.toString());
+        Todo existingTodo = todoRepository.findById(todoDto.getId()).orElse(null);
+        existingTodo.setTitle(todoDto.getTitle());
+        existingTodo.setDescription(todoDto.getDescription());
+        existingTodo.setFavorite(todoDto.isFavorite());
+        existingTodo.setTime(todoDto.getTime());
+        existingTodo.setEnergy(todoDto.getEnergy());
+        existingTodo.setDueDate(todoDto.getDueDate());
+        existingTodo.setCompleted(todoDto.isCompleted());
         Todo todoResponse = todoRepository.save(existingTodo);
         return modelMapper.map(todoResponse,TodoDto.class);
 

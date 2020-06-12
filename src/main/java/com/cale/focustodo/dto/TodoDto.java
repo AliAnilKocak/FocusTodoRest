@@ -17,11 +17,27 @@ public class TodoDto {
     @NotNull
     private String title;
     private String description;
-    private int is_favorite;
+    private boolean isFavorite;
     private String time;
     private String energy;
+    private boolean isCompleted;
     private Date dueDate;
     private int action_id;
     private Action action;
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 }

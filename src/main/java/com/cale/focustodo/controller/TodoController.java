@@ -39,14 +39,15 @@ public class TodoController {
         return todoService.getTodoById(id);
     }
 
-    @GetMapping("todosdeneme/{id}")
+    @GetMapping("todosbyaction/{id}")
     public List<TodoDto> productByIddeneme(@PathVariable int id) {
         return todoService.getTodoByIdDetail(id);
     }
 
     @PutMapping("todos")
-    public TodoDto updateTodo(@RequestBody Todo todo) {
-        return todoService.updateTodo(todo);
+    public TodoDto updateTodo(@RequestBody TodoDto todoDto) {
+        System.out.println(todoDto.toString());
+        return todoService.updateTodo(todoDto);
     }
 
     @DeleteMapping("todos/{id}")
