@@ -28,10 +28,21 @@ public class TodoController {
     }
 
     @GetMapping("todos")
-
     public List<TodoDto> AllTodos(@RequestHeader("Authorization") String tokenHeader) {
         String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
         return todoService.getTodos(username);
+    }
+
+    @GetMapping("favoritetodos")
+    public List<TodoDto> favoriteTodos(@RequestHeader("Authorization") String tokenHeader) {
+        String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
+        return todoService.getFavoriteTodos(username);
+    }
+
+    @GetMapping("completedtodos")
+    public List<TodoDto> completedTodos(@RequestHeader("Authorization") String tokenHeader) {
+        String username = jwtUtil.extractUsernameFromRequest(tokenHeader);
+        return todoService.getCompleteTodos(username);
     }
 
     @GetMapping("todos/{id}")

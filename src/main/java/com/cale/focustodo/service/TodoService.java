@@ -49,11 +49,24 @@ public class TodoService {
     }
 
 
+    public List<TodoDto> getFavoriteTodos(String username) {
+        ApplicationUser currentUser = userRepository.findByUsername(username);
+        List<Todo> data = todoRepository.findTodoByFavorite();
+        return Arrays.asList(modelMapper.map(data, TodoDto[].class));
+    }
+
+    public List<TodoDto> getCompleteTodos(String username) {
+        ApplicationUser currentUser = userRepository.findByUsername(username);
+        List<Todo> data = todoRepository.findTodoByCompleted();
+        return Arrays.asList(modelMapper.map(data, TodoDto[].class));
+    }
+
     public List<TodoDto> getTodos(String username) {
         ApplicationUser currentUser = userRepository.findByUsername(username);
         List<Todo> data = todoRepository.getByUserId(currentUser.getId());
         return Arrays.asList(modelMapper.map(data, TodoDto[].class));
     }
+
 
     public Page<Todo> getPaginatedCharacters(int pageNumber, int size) { //TODO TodoDto
         PageRequest pageable = PageRequest.of(pageNumber - 1, size);
